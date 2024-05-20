@@ -1,0 +1,27 @@
+<html lang="en">
+
+<body>
+
+  <div class="project-add">
+    
+      <label for="new-project">Project Name:</label>
+      <input id="new-project" type="text" #projectName placeholder="Enter project name" required>
+
+    <div>
+      <label for="start-date">Start Date:</label>
+      <input id="start-date" type="date" #startDate required>
+    </div>
+  
+    <div>
+      <label for="end-date">End Date:</label>
+      <input id="end-date" type="date" #endDate required>
+    </div>
+  
+    <button type="button" id="add-project-btn-form" class="btn btn-secondary btn-lg btn-block" (click)="add(projectName.value, startDate.value, endDate.value); projectName.value=''; startDate.value=''; endDate.value=''">
+      Add Project
+    </button>
+  </div>
+
+</body>
+</html>
+

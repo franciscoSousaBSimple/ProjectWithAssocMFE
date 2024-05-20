@@ -1,0 +1,46 @@
+
+<div class="container">
+  <!-- Barra de pesquisa -->
+  <div class="search-bar">
+    <!-- Botão de adicionar projeto com estilo semelhante ao de adicionar férias -->
+    <div class="add-project-btn">
+      <button class="btn btn-primary" id="add-project-btn"type="button" (click)="showAddForm = true">Add Project</button>
+    </div>
+    <div class="search-inputs">
+      <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="nomeFiltro"
+        aria-label="Search by name">
+      <button class="btn btn-primary" type="button" (click)="filtrarPorNome()">Search</button>
+    </div>
+  </div>
+
+  <!-- Formulário para adicionar projeto, estilo similar ao de adicionar férias -->
+  <div *ngIf="showAddForm" class="add-project-form">
+    <div class="form-overlay"></div>
+    <div class="form-container">
+      <span class="close" (click)="showAddForm = false">&times;</span>
+      <app-add-projetos (projectAdded)="onProjetoAdded($event)"></app-add-projetos>
+    </div>
+  </div>
+
+  <!-- Lista de projetos -->
+  <table id="projects-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proj of projetos; let i = index">
+        <td>{{proj.name}}</td>
+        <td>{{proj.startDate}}</td>
+        <td>{{proj.endDate}}</td>
+        <td><button type="button" (click)="projectDetails(proj)">Details</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-associations  [selectedProject]="selectedProject" *ngIf="showProjectDetails"></app-associations>

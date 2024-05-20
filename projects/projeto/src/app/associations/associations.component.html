@@ -1,0 +1,47 @@
+<h1><p>Detalhes do projeto:</p></h1>
+ <p>{{selectedProject.name}}</p>
+ <p>{{selectedProject.startDate}}</p>
+ <p>{{selectedProject.endDate}}</p>
+<div>
+    <!-- Formulário de adicionar associação -->
+    <div *ngIf="showCreateAssociation" class="add-association-form">
+      <div class="form-overlay"></div> <!-- Fundo escuro para destacar o formulário -->
+      <div class="form-container">
+        <span class="close" (click)="toggleCreateAssociation()">&times;</span>
+        <app-add-associations 
+        [colaboradoresAssocLista]="colaboradoresAssocLista" 
+        [projectsAssocLista]="projectsAssocLista"
+        [selectedProject]="selectedProject"
+        (associationAdded)="onAssociationAdded()">
+      </app-add-associations>
+      </div>
+    </div>
+  
+    <div class="container">
+      <button class="add-association-btn" id="add-association-btn1" (click)="toggleCreateAssociation()">Adicionar ao projeto</button>
+      <div class="search-bar">
+        <input class="search-input" type="text" placeholder="Pesquisar por colaborador" [(ngModel)]="searchQuery"
+          (input)="search()">
+        <button class="search-button" (click)="search()">Pesquisar</button>
+      </div>
+    </div>
+  
+    <table id="associations-table" >
+      <thead>
+        <tr>
+          <th>Colaborador</th>
+          <th>Email do colaborador</th>
+          <th>Data de Início</th>
+          <th>Data de Fim</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="associations" *ngFor="let association of filteredAssociations" >
+          <td>{{ getColaboratorName(association.colaboratorId) }}</td>
+          <td>{{ getColaboratorEmail(association.colaboratorId) }}</td>
+          <td>{{ association.startDate }}</td>
+          <td>{{ association.endDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

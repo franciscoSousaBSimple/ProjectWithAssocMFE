@@ -1,0 +1,37 @@
+<p>add-associations works!</p>
+
+
+<div class="addAssociation-form">
+    Adicione um colaborador ao projeto {{selectedProject.name}}
+    <label for="colaboratorId">Colaborador:</label>
+    <select id="colaboratorId" #colaboratorId required>
+        <option *ngFor="let colaborator of colaboradoresAssocLista" [value]="colaborator.id"> {{ colaborator.id }} - {{ colaborator.name }}</option>
+    </select>
+
+<!-- <div class="addProject-form">
+    <label for="projectId">Project:</label>
+    <select id="projectId" #projectId required>
+        <option *ngFor="let project of projectsAssocLista" [value]="project.id">{{ project.name }}</option>
+    </select> -->
+
+     <!-- Adiciona uma mensagem de erro se o campo de nome estiver vazio  -->
+    <div *ngIf="showAssociationNameError" class="error-message text-danger">
+       Os id de colab e as datas são obrigatórias
+    </div>
+
+    <label for="associationStartDate">StartDate: </label>
+    <input id="associationStartDate" type="date" #associationStartDate required/>
+
+    <label for="associationEndDate">EndDate: </label>
+    <input id="associationEndDate" type="date" #associationEndDate />
+
+    <button type="submit"  id="add-project-btn-form" class="add-button"
+        (click)="validateAndAddAssociation(colaboratorId.value, associationStartDate.value, associationEndDate.value); 
+        colaboratorId.value = ''; associationStartDate.value = ''; associationEndDate.value = '';">
+        Adicionar
+    </button>
+</div>
+
+
+
+
